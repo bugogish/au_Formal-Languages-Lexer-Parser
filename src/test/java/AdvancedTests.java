@@ -1,6 +1,3 @@
-package ru.spbau.mit;
-
-
 import org.junit.Test;
 import ru.spbau.mit.Lexems.*;
 import ru.spbau.mit.Utils.Lexer;

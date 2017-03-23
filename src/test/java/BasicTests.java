@@ -12,8 +12,6 @@
    Разделители языка: (, ), ;
 */
 
-package ru.spbau.mit;
-
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -239,7 +237,7 @@ public class BasicTests {
         }
     }
 
-    @Test()
+    @Test
     public void testNumIsNotID() throws IOException {
         String id = "1";
         StringReader reader = new StringReader(id);
