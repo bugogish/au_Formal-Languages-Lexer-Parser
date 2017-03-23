@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lexer.iml" filepath="$PROJECT_DIR$/.idea/modules/Lexer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lexer_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Lexer_main.iml" group="Lexer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lexer_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Lexer_test.iml" group="Lexer" />
+    </modules>
+  </component>
+</project>
