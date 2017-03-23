@@ -9,11 +9,12 @@ import java.util.ArrayList;
 public class Lex {
     public static void main(String argv[]) {
             if (argv.length == 0 || argv.length > 1) {
-                System.out.println("Usage : Lexer <inputfile>");
+                System.out.println("Usage : ./run.sh <file>");
             }
             else {
                 try(java.io.FileReader reader = new FileReader(argv[0])) {
                   ArrayList<Lexem> lexems = Lexer.run(reader);
+                    System.out.println("Following lexems were found:");
                   for (Lexem lex : lexems) {
                       System.out.println(lex);
                   }
