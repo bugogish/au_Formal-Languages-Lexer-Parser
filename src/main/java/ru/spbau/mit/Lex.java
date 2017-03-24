@@ -1,6 +1,7 @@
 package ru.spbau.mit;
 
 import ru.spbau.mit.Lexems.Lexem;
+import ru.spbau.mit.Utils.LexException;
 import ru.spbau.mit.Utils.Lexer;
 
 import java.io.FileReader;
@@ -24,6 +25,9 @@ public class Lex {
                 }
                 catch (java.io.IOException e) {
                     System.out.println("IO error scanning file \""+argv[0]+"\"");
+                    System.out.println(e.getMessage());
+                } catch (LexException e) {
+                    System.out.println("Lexer error scanning file \""+argv[0]+"\"");
                     System.out.println(e.getMessage());
                 }
             }

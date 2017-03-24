@@ -16,8 +16,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static ru.spbau.mit.Utils.Lexer.run;
 
+import ru.spbau.mit.Lex;
 import ru.spbau.mit.Lexems.*;
+import ru.spbau.mit.Utils.LexException;
 import ru.spbau.mit.Utils.Lexer;
 
 import java.io.IOException;
@@ -25,11 +28,11 @@ import java.io.StringReader;
 import java.util.ArrayList;
 
 public class BasicTests {
-    private void testComment(String text) throws IOException {
+    private void testComment(String text) throws IOException, LexException {
         String[] tokens = text.split("\\r\\n|\\r|\\n");
         text = tokens[0];
         StringReader reader = new StringReader(text);
-        ArrayList<Lexem> lexems = Lexer.run(reader);
+        ArrayList<Lexem> lexems = run(reader);
 
         assertEquals(1, lexems.size());
         Comment lex = (Comment) lexems.get(0);
@@ -39,11 +42,11 @@ public class BasicTests {
         assertEquals(text.length() - 1, lex.getFinish());
     }
 
-    private void testCorrectIdentifier(String text) throws IOException {
+    private void testCorrectIdentifier(String text) throws IOException, LexException {
         String[] tokens = text.split("\\s+");
         text = tokens[0];
         StringReader reader = new StringReader(text);
-        ArrayList<Lexem> lexems = Lexer.run(reader);
+        ArrayList<Lexem> lexems = run(reader);
 
         assertEquals(1, lexems.size());
         Identifier lex = (Identifier) lexems.get(0);
@@ -54,9 +57,9 @@ public class BasicTests {
         assertEquals("Ident(" + text + ", 0, 0, " + (text.length() - 1) + ")", lex.toString());
     }
 
-    private void testKeyword(String name, LexemType type) throws IOException{
+    private void testKeyword(String name, LexemType type) throws IOException, LexException {
         StringReader reader = new StringReader(name);
-        ArrayList<Lexem> lexems = Lexer.run(reader);
+        ArrayList<Lexem> lexems = run(reader);
         Lexem lex = lexems.get(0);
 
         assertEquals(1, lexems.size());
@@ -67,9 +70,9 @@ public class BasicTests {
         assertEquals(type.name() + "(0, 0, " + (name.length() - 1) + ")", lex.toString());
     }
 
-    private void testNum(String number) throws IOException {
+    private void testNum(String number) throws IOException, LexException {
         StringReader reader = new StringReader(number);
-        ArrayList<Lexem> lexems = Lexer.run(reader);
+        ArrayList<Lexem> lexems = run(reader);
         NumericValue lex = (NumericValue) lexems.get(0);
 
         assertEquals(1, lexems.size());
@@ -80,9 +83,9 @@ public class BasicTests {
         assertEquals("Num(" + new Double(number) + ", 0, 0, " + (number.length() - 1) + ")", lex.toString());
     }
 
-    private void testOperator(String name, LexemType type) throws IOException {
+    private void testOperator(String name, LexemType type) throws IOException, LexException {
         StringReader reader = new StringReader(name);
-        ArrayList<Lexem> lexems = Lexer.run(reader);
+        ArrayList<Lexem> lexems = run(reader);
         Lexem lex = lexems.get(0);
 
         assertEquals(1, lexems.size());
@@ -94,7 +97,7 @@ public class BasicTests {
     }
 
     @Test
-    public void testComments() throws IOException {
+    public void testComments() throws IOException, LexException {
         final String simpleComment = "//cmnt";
         final String fewWords = "//few words comment";
         final String withNewLine1 = "//    hasNewLine\n";
@@ -109,7 +112,7 @@ public class BasicTests {
     }
 
     @Test
-    public void testKeyWords() throws IOException {
+    public void testKeyWords() throws IOException, LexException {
         testKeyword("if", LexemType.KW_If);
         testKeyword("else", LexemType.KW_Else);
         testKeyword("while", LexemType.KW_While);
@@ -121,7 +124,7 @@ public class BasicTests {
     }
 
     @Test
-    public void testCorrectNumericValues() throws IOException {
+    public void testCorrectNumericValues() throws IOException, LexException {
         String simpleInteger = "1234";
         String negativeInteger = "-1234";
         String simpleFloat = "1234.1234";
@@ -148,15 +151,15 @@ public class BasicTests {
     }
 
     @Test(expected = Error.class)
-    public void testLeadingZeroNumeric() throws IOException {
+    public void testLeadingZeroNumeric() throws IOException, LexException {
         String wrongInteger = "01234";
         testNum(wrongInteger);
     }
 
     @Test
-    public void testBoolean() throws IOException {
+    public void testBoolean() throws IOException, LexException {
         StringReader reader = new StringReader("true");
-        ArrayList<Lexem> lexems = Lexer.run(reader);
+        ArrayList<Lexem> lexems = run(reader);
         Lexem lex = lexems.get(0);
 
         assertEquals(1, lexems.size());
@@ -167,7 +170,7 @@ public class BasicTests {
         assertEquals("Bool(true, 0, 0, " + ("true".length() - 1) + ")", lex.toString());
 
         reader = new StringReader("false");
-        lexems = Lexer.run(reader);
+        lexems = run(reader);
         lex = lexems.get(0);
 
         assertEquals(1, lexems.size());
@@ -179,9 +182,9 @@ public class BasicTests {
     }
 
     @Test
-    public void testBracketAndColon() throws IOException {
+    public void testBracketAndColon() throws IOException, LexException {
         StringReader reader = new StringReader("(");
-        ArrayList<Lexem> lexems = Lexer.run(reader);
+        ArrayList<Lexem> lexems = run(reader);
         Lexem lex = lexems.get(0);
 
         assertEquals(1, lexems.size());
@@ -191,7 +194,7 @@ public class BasicTests {
         assertEquals("LBracket(0, 0, 0)", lex.toString());
 
         reader = new StringReader(")");
-        lexems = Lexer.run(reader);
+        lexems = run(reader);
         lex = lexems.get(0);
 
         assertEquals(1, lexems.size());
@@ -201,7 +204,7 @@ public class BasicTests {
         assertEquals("RBracket(0, 0, 0)", lex.toString());
 
         reader = new StringReader(";");
-        lexems = Lexer.run(reader);
+        lexems = run(reader);
         lex = lexems.get(0);
 
         assertEquals(1, lexems.size());
@@ -212,7 +215,7 @@ public class BasicTests {
     }
 
     @Test
-    public void testOperators() throws IOException {
+    public void testOperators() throws IOException, LexException {
         testOperator("==", LexemType.Eq);
         testOperator("+", LexemType.Plus);
         testOperator("-", LexemType.Minus);
@@ -229,7 +232,7 @@ public class BasicTests {
     }
 
     @Test
-    public void testCorrectIdentifier() throws IOException {
+    public void testCorrectIdentifier() throws IOException, LexException {
         String[] identifiers = {"simpleID", "id1234", "_1234 ", "_____", "id_1234",
                 "a", "_a", "A", "a_b", "iDeNt", "_i_D_", "__agent007__", "_13", "e2_e4", "reader"};
         for (String id : identifiers) {
@@ -238,34 +241,34 @@ public class BasicTests {
     }
 
     @Test
-    public void testNumIsNotID() throws IOException {
+    public void testNumIsNotID() throws IOException, LexException {
         String id = "1";
         StringReader reader = new StringReader(id);
-        ArrayList<Lexem> lexems = Lexer.run(reader);
+        ArrayList<Lexem> lexems = run(reader);
         assertFalse(lexems.get(0) instanceof Identifier);
     }
 
-    @Test(expected = Error.class)
-    public void testWrongIdentifier() throws IOException {
+    @Test(expected = LexException.class)
+    public void testWrongIdentifier() throws IOException, LexException {
         String id = "!myVar!";
         StringReader reader = new StringReader(id);
-        ArrayList<Lexem> lexems = Lexer.run(reader);
+        ArrayList<Lexem> lexems = run(reader);
         System.out.println(lexems.get(1));
     }
 
 
     @Test
-    public void testWhitespaces() throws IOException {
+    public void testWhitespaces() throws IOException, LexException {
         StringReader reader = new StringReader("        ");
-        ArrayList<Lexem> lexems = Lexer.run(reader);
+        ArrayList<Lexem> lexems = run(reader);
         assertEquals(0, lexems.size());
 
         reader = new StringReader("        \n");
-        lexems = Lexer.run(reader);
+        lexems = run(reader);
         assertEquals(0, lexems.size());
 
         reader = new StringReader("        \n\r \t \f");
-        lexems = Lexer.run(reader);
+        lexems = run(reader);
         assertEquals(0, lexems.size());
     }
 

@@ -1,5 +1,6 @@
 import org.junit.Test;
 import ru.spbau.mit.Lexems.*;
+import ru.spbau.mit.Utils.LexException;
 import ru.spbau.mit.Utils.Lexer;
 
 import java.io.File;
@@ -13,7 +14,7 @@ import static ru.spbau.mit.Lexems.LexemType.*;
 
 public class AdvancedTests {
     @Test
-    public void testComplexInput() throws IOException {
+    public void testComplexInput() throws IOException, LexException {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("input").getFile());
 

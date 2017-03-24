@@ -26,7 +26,7 @@ import static ru.spbau.mit.Lexems.LexemType.*;
 %type Lexem
 %line
 %column
-
+%scanerror LexException
 
 %{
   private Lexem keyword(LexemType type) {
@@ -54,7 +54,7 @@ import static ru.spbau.mit.Lexems.LexemType.*;
           return new Comment(yyline, yycolumn, yycolumn + yytext().length() - 1, comment);
     }
 
-   public static ArrayList<Lexem> run(java.io.Reader reader) throws IOException {
+   public static ArrayList<Lexem> run(java.io.Reader reader) throws IOException, LexException {
       Lexer lexer;
       ArrayList<Lexem> lexems = new ArrayList<>();
       lexer = new Lexer(reader);
@@ -126,4 +126,5 @@ DoubleNumber = -?{Integer}{Fractional}?{Exponent}? | -?\.[0-9]+{Exponent}?
       {Identifier}                   { return ident(yytext()); }
 }
 
-[^]                              { throw new Error("Character " + yytext() + " is not recognized."); }
+[^]                              { throw new LexException(String.format("Character %s at line %d from position %d to %d was not recognized.", yytext(),
+                                                                                            yyline, yycolumn, yycolumn + yytext().length() - 1)); }
