@@ -126,5 +126,5 @@ DoubleNumber = -?{Integer}{Fractional}?{Exponent}? | -?\.[0-9]+{Exponent}?
       {Identifier}                   { return ident(yytext()); }
 }
 
-[^]                              { throw new LexException(String.format("Character %s at line %d from position %d to %d was not recognized.", yytext(),
-                                                                                            yyline, yycolumn, yycolumn + yytext().length() - 1)); }
+[^]                              { throw new LexException(String.format("Character %s at line %d in position %d was not recognized.", yytext(),
+                                                                                            yyline, yycolumn)); }
