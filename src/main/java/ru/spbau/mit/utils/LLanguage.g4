@@ -2,11 +2,6 @@ lexer grammar LLanguage;
 @header {
 package ru.spbau.mit.utils;
 }
-// LEXER
-
-@lexer::members {
-    public boolean mismatched_brackets = false;
-}
 
 // Keywords
 
@@ -21,6 +16,7 @@ BEGIN         : 'begin';
 END           : 'end';
 
 // Floating-Point Literals
+
 Float
     :   '-'? Integer Fractional? Exponent?
     |   '-'? '.' Digit+ Exponent?
@@ -124,9 +120,7 @@ Identifier
     :   [a-zA-Z_][a-zA-Z0-9_]*
     ;
 
-//
-// Whitespace and comments
-//
+// Whitespace
 
 WS  :  [ \t\r\n\f]+ -> skip
     ;

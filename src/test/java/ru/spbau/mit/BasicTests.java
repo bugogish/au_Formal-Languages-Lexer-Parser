@@ -52,7 +52,7 @@ public class BasicTests {
     }
 
     private void testKeyword(String name, String type) throws IOException {
-       testLexem(type, name);
+        testLexem(type, name);
     }
 
     private void testNum(String number) throws IOException {
@@ -60,7 +60,7 @@ public class BasicTests {
     }
 
     private void testOperator(String name, String type) throws IOException {
-       testLexem(type, name);
+        testLexem(type, name);
     }
 
     @Test
@@ -222,14 +222,14 @@ public class BasicTests {
         testLexem("COMMENT", "(* (* \n multiline nestes *)  \r *)");
     }
 
-    @Test(expected = LexException.class)
-    public void testIncorrectNestedComment() throws IOException {
-        testLexem(null, "(* (* comment *)");
-    }
-
     //    на (* (* comment *) лексер должен выдавать ошибку, потому что комментарий не закрыт.
     @Test(expected = LexException.class)
     public void testIncorrectlyClosedNestedComment() throws IOException {
         testLexem(null, "(*This is (*not correctly closed nested *) comment");
+    }
+
+    @Test(expected = LexException.class)
+    public void testIncorrectNestedComment() throws IOException {
+        testLexem(null, "(* (* comment *)");
     }
 }
