@@ -31,5 +31,5 @@
 Для генерации соответствующего ему лексера необходимо иметь установленный [antlr](http://www.antlr.org/).  
 (Для работы скрипта это не обязательно).  
 
-[full]: https://ibb.co/bvcttv
-[trimmed]: https://ibb.co/nwCnLa
+[full]: https://github.com/bugogish/Formal-Languages/blob/Parser/img/FULL.png "Full tree"
+[trimmed]: https://github.com/bugogish/Formal-Languages/blob/Parser/img/TRiMMED.png "Trimmed tree"
