@@ -1,0 +1,2 @@
+if (a <= b < c >= d > e) then skip else begin write(x);
+skip end; skip; skip; skip;
