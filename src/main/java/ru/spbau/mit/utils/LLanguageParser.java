@@ -26,11 +26,11 @@ public class LLanguageParser extends Parser {
 		ERROR_WHILE_PARSING_COMMENT=34, Id=35, WS=36;
 	public static final int
 		RULE_program = 0, RULE_statement = 1, RULE_block = 2, RULE_assignment = 3, 
-		RULE_expression = 4, RULE_andexpr = 5, RULE_orexpr = 6, RULE_eqexpr = 7, 
+		RULE_expression = 4, RULE_orexpr = 5, RULE_andexpr = 6, RULE_eqexpr = 7, 
 		RULE_compexpr = 8, RULE_addexpr = 9, RULE_multexpr = 10, RULE_atomexpr = 11;
 	public static final String[] ruleNames = {
-		"program", "statement", "block", "assignment", "expression", "andexpr", 
-		"orexpr", "eqexpr", "compexpr", "addexpr", "multexpr", "atomexpr"
+		"program", "statement", "block", "assignment", "expression", "orexpr", 
+		"andexpr", "eqexpr", "compexpr", "addexpr", "multexpr", "atomexpr"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -549,6 +549,90 @@ public class LLanguageParser extends Parser {
 		return _localctx;
 	}
 
+	public static class OrexprContext extends ParserRuleContext {
+		public AndexprContext andexpr() {
+			return getRuleContext(AndexprContext.class,0);
+		}
+		public OrexprContext orexpr() {
+			return getRuleContext(OrexprContext.class,0);
+		}
+		public TerminalNode OR() { return getToken(LLanguageParser.OR, 0); }
+		public OrexprContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_orexpr; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof LLanguageListener ) ((LLanguageListener)listener).enterOrexpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof LLanguageListener ) ((LLanguageListener)listener).exitOrexpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof LLanguageVisitor ) return ((LLanguageVisitor<? extends T>)visitor).visitOrexpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final OrexprContext orexpr() throws RecognitionException {
+		return orexpr(0);
+	}
+
+	private OrexprContext orexpr(int _p) throws RecognitionException {
+		ParserRuleContext _parentctx = _ctx;
+		int _parentState = getState();
+		OrexprContext _localctx = new OrexprContext(_ctx, _parentState);
+		OrexprContext _prevctx = _localctx;
+		int _startState = 10;
+		enterRecursionRule(_localctx, 10, RULE_orexpr, _p);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			{
+			setState(88);
+			andexpr(0);
+			}
+			_ctx.stop = _input.LT(-1);
+			setState(95);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					if ( _parseListeners!=null ) triggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					{
+					_localctx = new OrexprContext(_parentctx, _parentState);
+					pushNewRecursionContext(_localctx, _startState, RULE_orexpr);
+					setState(90);
+					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
+					setState(91);
+					match(OR);
+					setState(92);
+					andexpr(0);
+					}
+					} 
+				}
+				setState(97);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			unrollRecursionContexts(_parentctx);
+		}
+		return _localctx;
+	}
+
 	public static class AndexprContext extends ParserRuleContext {
 		public EqexprContext eqexpr() {
 			return getRuleContext(EqexprContext.class,0);
@@ -585,99 +669,15 @@ public class LLanguageParser extends Parser {
 		int _parentState = getState();
 		AndexprContext _localctx = new AndexprContext(_ctx, _parentState);
 		AndexprContext _prevctx = _localctx;
-		int _startState = 10;
-		enterRecursionRule(_localctx, 10, RULE_andexpr, _p);
-		try {
-			int _alt;
-			enterOuterAlt(_localctx, 1);
-			{
-			{
-			setState(88);
-			eqexpr(0);
-			}
-			_ctx.stop = _input.LT(-1);
-			setState(95);
-			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
-					if ( _parseListeners!=null ) triggerExitRuleEvent();
-					_prevctx = _localctx;
-					{
-					{
-					_localctx = new AndexprContext(_parentctx, _parentState);
-					pushNewRecursionContext(_localctx, _startState, RULE_andexpr);
-					setState(90);
-					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(91);
-					match(AND);
-					setState(92);
-					eqexpr(0);
-					}
-					} 
-				}
-				setState(97);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			unrollRecursionContexts(_parentctx);
-		}
-		return _localctx;
-	}
-
-	public static class OrexprContext extends ParserRuleContext {
-		public AddexprContext addexpr() {
-			return getRuleContext(AddexprContext.class,0);
-		}
-		public OrexprContext orexpr() {
-			return getRuleContext(OrexprContext.class,0);
-		}
-		public TerminalNode OR() { return getToken(LLanguageParser.OR, 0); }
-		public OrexprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_orexpr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof LLanguageListener ) ((LLanguageListener)listener).enterOrexpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof LLanguageListener ) ((LLanguageListener)listener).exitOrexpr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof LLanguageVisitor ) return ((LLanguageVisitor<? extends T>)visitor).visitOrexpr(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final OrexprContext orexpr() throws RecognitionException {
-		return orexpr(0);
-	}
-
-	private OrexprContext orexpr(int _p) throws RecognitionException {
-		ParserRuleContext _parentctx = _ctx;
-		int _parentState = getState();
-		OrexprContext _localctx = new OrexprContext(_ctx, _parentState);
-		OrexprContext _prevctx = _localctx;
 		int _startState = 12;
-		enterRecursionRule(_localctx, 12, RULE_orexpr, _p);
+		enterRecursionRule(_localctx, 12, RULE_andexpr, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
 			setState(99);
-			addexpr(0);
+			eqexpr(0);
 			}
 			_ctx.stop = _input.LT(-1);
 			setState(106);
@@ -689,14 +689,14 @@ public class LLanguageParser extends Parser {
 					_prevctx = _localctx;
 					{
 					{
-					_localctx = new OrexprContext(_parentctx, _parentState);
-					pushNewRecursionContext(_localctx, _startState, RULE_orexpr);
+					_localctx = new AndexprContext(_parentctx, _parentState);
+					pushNewRecursionContext(_localctx, _startState, RULE_andexpr);
 					setState(101);
 					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
 					setState(102);
-					match(OR);
+					match(AND);
 					setState(103);
-					addexpr(0);
+					eqexpr(0);
 					}
 					} 
 				}
@@ -1274,9 +1274,9 @@ public class LLanguageParser extends Parser {
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
 		case 5:
-			return andexpr_sempred((AndexprContext)_localctx, predIndex);
-		case 6:
 			return orexpr_sempred((OrexprContext)_localctx, predIndex);
+		case 6:
+			return andexpr_sempred((AndexprContext)_localctx, predIndex);
 		case 7:
 			return eqexpr_sempred((EqexprContext)_localctx, predIndex);
 		case 8:
@@ -1286,14 +1286,14 @@ public class LLanguageParser extends Parser {
 		}
 		return true;
 	}
-	private boolean andexpr_sempred(AndexprContext _localctx, int predIndex) {
+	private boolean orexpr_sempred(OrexprContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
 			return precpred(_ctx, 1);
 		}
 		return true;
 	}
-	private boolean orexpr_sempred(OrexprContext _localctx, int predIndex) {
+	private boolean andexpr_sempred(AndexprContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 1:
 			return precpred(_ctx, 1);
@@ -1360,28 +1360,28 @@ public class LLanguageParser extends Parser {
 		"\2\2\2?@\7\n\2\2@E\5\4\3\2AB\7\21\2\2BD\5\4\3\2CA\3\2\2\2DG\3\2\2\2EC"+
 		"\3\2\2\2EF\3\2\2\2FH\3\2\2\2GE\3\2\2\2HI\7\13\2\2IL\3\2\2\2JL\5\4\3\2"+
 		"K?\3\2\2\2KJ\3\2\2\2L\7\3\2\2\2MN\7%\2\2NO\7\22\2\2OP\5\n\6\2P\t\3\2\2"+
-		"\2QX\5\26\f\2RX\5\24\13\2SX\5\22\n\2TX\5\20\t\2UX\5\f\7\2VX\5\16\b\2W"+
+		"\2QX\5\26\f\2RX\5\24\13\2SX\5\22\n\2TX\5\20\t\2UX\5\16\b\2VX\5\f\7\2W"+
 		"Q\3\2\2\2WR\3\2\2\2WS\3\2\2\2WT\3\2\2\2WU\3\2\2\2WV\3\2\2\2X\13\3\2\2"+
-		"\2YZ\b\7\1\2Z[\5\20\t\2[a\3\2\2\2\\]\f\3\2\2]^\7\31\2\2^`\5\20\t\2_\\"+
+		"\2YZ\b\7\1\2Z[\5\16\b\2[a\3\2\2\2\\]\f\3\2\2]^\7\32\2\2^`\5\16\b\2_\\"+
 		"\3\2\2\2`c\3\2\2\2a_\3\2\2\2ab\3\2\2\2b\r\3\2\2\2ca\3\2\2\2de\b\b\1\2"+
-		"ef\5\24\13\2fl\3\2\2\2gh\f\3\2\2hi\7\32\2\2ik\5\24\13\2jg\3\2\2\2kn\3"+
-		"\2\2\2lj\3\2\2\2lm\3\2\2\2m\17\3\2\2\2nl\3\2\2\2op\b\t\1\2pq\5\22\n\2"+
-		"qz\3\2\2\2rs\f\4\2\2st\7\25\2\2ty\5\22\n\2uv\f\3\2\2vw\7\30\2\2wy\5\22"+
-		"\n\2xr\3\2\2\2xu\3\2\2\2y|\3\2\2\2zx\3\2\2\2z{\3\2\2\2{\21\3\2\2\2|z\3"+
-		"\2\2\2}~\b\n\1\2~\177\5\24\13\2\177\u008e\3\2\2\2\u0080\u0081\f\6\2\2"+
-		"\u0081\u0082\7\24\2\2\u0082\u008d\5\24\13\2\u0083\u0084\f\5\2\2\u0084"+
-		"\u0085\7\26\2\2\u0085\u008d\5\24\13\2\u0086\u0087\f\4\2\2\u0087\u0088"+
-		"\7\23\2\2\u0088\u008d\5\24\13\2\u0089\u008a\f\3\2\2\u008a\u008b\7\27\2"+
-		"\2\u008b\u008d\5\24\13\2\u008c\u0080\3\2\2\2\u008c\u0083\3\2\2\2\u008c"+
-		"\u0086\3\2\2\2\u008c\u0089\3\2\2\2\u008d\u0090\3\2\2\2\u008e\u008c\3\2"+
-		"\2\2\u008e\u008f\3\2\2\2\u008f\23\3\2\2\2\u0090\u008e\3\2\2\2\u0091\u0092"+
-		"\b\13\1\2\u0092\u0093\5\26\f\2\u0093\u009c\3\2\2\2\u0094\u0095\f\4\2\2"+
-		"\u0095\u0096\7\33\2\2\u0096\u009b\5\26\f\2\u0097\u0098\f\3\2\2\u0098\u0099"+
-		"\7\34\2\2\u0099\u009b\5\26\f\2\u009a\u0094\3\2\2\2\u009a\u0097\3\2\2\2"+
-		"\u009b\u009e\3\2\2\2\u009c\u009a\3\2\2\2\u009c\u009d\3\2\2\2\u009d\25"+
-		"\3\2\2\2\u009e\u009c\3\2\2\2\u009f\u00a4\5\30\r\2\u00a0\u00a1\7\36\2\2"+
-		"\u00a1\u00a3\5\26\f\2\u00a2\u00a0\3\2\2\2\u00a3\u00a6\3\2\2\2\u00a4\u00a2"+
-		"\3\2\2\2\u00a4\u00a5\3\2\2\2\u00a5\u00b8\3\2\2\2\u00a6\u00a4\3\2\2\2\u00a7"+
+		"ef\5\20\t\2fl\3\2\2\2gh\f\3\2\2hi\7\31\2\2ik\5\20\t\2jg\3\2\2\2kn\3\2"+
+		"\2\2lj\3\2\2\2lm\3\2\2\2m\17\3\2\2\2nl\3\2\2\2op\b\t\1\2pq\5\22\n\2qz"+
+		"\3\2\2\2rs\f\4\2\2st\7\25\2\2ty\5\22\n\2uv\f\3\2\2vw\7\30\2\2wy\5\22\n"+
+		"\2xr\3\2\2\2xu\3\2\2\2y|\3\2\2\2zx\3\2\2\2z{\3\2\2\2{\21\3\2\2\2|z\3\2"+
+		"\2\2}~\b\n\1\2~\177\5\24\13\2\177\u008e\3\2\2\2\u0080\u0081\f\6\2\2\u0081"+
+		"\u0082\7\24\2\2\u0082\u008d\5\24\13\2\u0083\u0084\f\5\2\2\u0084\u0085"+
+		"\7\26\2\2\u0085\u008d\5\24\13\2\u0086\u0087\f\4\2\2\u0087\u0088\7\23\2"+
+		"\2\u0088\u008d\5\24\13\2\u0089\u008a\f\3\2\2\u008a\u008b\7\27\2\2\u008b"+
+		"\u008d\5\24\13\2\u008c\u0080\3\2\2\2\u008c\u0083\3\2\2\2\u008c\u0086\3"+
+		"\2\2\2\u008c\u0089\3\2\2\2\u008d\u0090\3\2\2\2\u008e\u008c\3\2\2\2\u008e"+
+		"\u008f\3\2\2\2\u008f\23\3\2\2\2\u0090\u008e\3\2\2\2\u0091\u0092\b\13\1"+
+		"\2\u0092\u0093\5\26\f\2\u0093\u009c\3\2\2\2\u0094\u0095\f\4\2\2\u0095"+
+		"\u0096\7\33\2\2\u0096\u009b\5\26\f\2\u0097\u0098\f\3\2\2\u0098\u0099\7"+
+		"\34\2\2\u0099\u009b\5\26\f\2\u009a\u0094\3\2\2\2\u009a\u0097\3\2\2\2\u009b"+
+		"\u009e\3\2\2\2\u009c\u009a\3\2\2\2\u009c\u009d\3\2\2\2\u009d\25\3\2\2"+
+		"\2\u009e\u009c\3\2\2\2\u009f\u00a4\5\30\r\2\u00a0\u00a1\7\36\2\2\u00a1"+
+		"\u00a3\5\26\f\2\u00a2\u00a0\3\2\2\2\u00a3\u00a6\3\2\2\2\u00a4\u00a2\3"+
+		"\2\2\2\u00a4\u00a5\3\2\2\2\u00a5\u00b8\3\2\2\2\u00a6\u00a4\3\2\2\2\u00a7"+
 		"\u00ac\5\30\r\2\u00a8\u00a9\7\37\2\2\u00a9\u00ab\5\26\f\2\u00aa\u00a8"+
 		"\3\2\2\2\u00ab\u00ae\3\2\2\2\u00ac\u00aa\3\2\2\2\u00ac\u00ad\3\2\2\2\u00ad"+
 		"\u00b8\3\2\2\2\u00ae\u00ac\3\2\2\2\u00af\u00b4\5\30\r\2\u00b0\u00b1\7"+

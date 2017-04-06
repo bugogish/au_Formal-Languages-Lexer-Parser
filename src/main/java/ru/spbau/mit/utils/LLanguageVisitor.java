@@ -43,17 +43,17 @@ public interface LLanguageVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpression(LLanguageParser.ExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link LLanguageParser#andexpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAndexpr(LLanguageParser.AndexprContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link LLanguageParser#orexpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitOrexpr(LLanguageParser.OrexprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LLanguageParser#andexpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAndexpr(LLanguageParser.AndexprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LLanguageParser#eqexpr}.
 	 * @param ctx the parse tree

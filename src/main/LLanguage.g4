@@ -31,14 +31,15 @@ expression
     | orexpr // priority 1
     ;
 
+
+orexpr
+    : andexpr
+    | orexpr OR andexpr
+    ;
+
 andexpr
     : eqexpr
     | andexpr AND eqexpr
-    ;
-
-orexpr
-    : addexpr
-    | orexpr OR addexpr
     ;
 
 eqexpr

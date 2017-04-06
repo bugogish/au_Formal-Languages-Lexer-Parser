@@ -112,7 +112,7 @@ public class ASTBuilder implements Tree {
                     String type = vocabulary.getSymbolicName(token.getType());
                     String text = token.getText();
                     int pos = token.getCharPositionInLine();
-                    if (Objects.equals(type, "Id") || Objects.equals(type, "Float")) {
+                    if (Objects.equals(type, "Id") || Objects.equals(type, "Float") || Objects.equals(type, "Boolean")) {
                         nodeText = String.format("%s[%s, %d, %d, %d]", type, text, token.getLine(), pos, pos + text.length() - 1);
                     } else {
                         nodeText = String.format("%s[%d, %d, %d]", type, token.getLine(), pos, pos + text.length() - 1);

@@ -60,16 +60,6 @@ public interface LLanguageListener extends ParseTreeListener {
 	 */
 	void exitExpression(LLanguageParser.ExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link LLanguageParser#andexpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterAndexpr(LLanguageParser.AndexprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link LLanguageParser#andexpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitAndexpr(LLanguageParser.AndexprContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link LLanguageParser#orexpr}.
 	 * @param ctx the parse tree
 	 */
@@ -79,6 +69,16 @@ public interface LLanguageListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOrexpr(LLanguageParser.OrexprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LLanguageParser#andexpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterAndexpr(LLanguageParser.AndexprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LLanguageParser#andexpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitAndexpr(LLanguageParser.AndexprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LLanguageParser#eqexpr}.
 	 * @param ctx the parse tree
