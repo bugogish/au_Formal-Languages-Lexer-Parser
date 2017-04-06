@@ -1,0 +1,4 @@
+if (y == 1) then
+read(x);
+write(x)
+else read(y)

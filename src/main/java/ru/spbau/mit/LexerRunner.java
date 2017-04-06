@@ -65,11 +65,12 @@ class LexerRunner {
 
     void parseFile(String file) throws IOException {
         CommonTokenStream tokens = lexFile(file, Token.DEFAULT_CHANNEL);
+        if (!noTree) {
         parser = new LLanguageParser(tokens);
         parser.removeErrorListeners();
         parser.addErrorListener(new ErrorListener());
         ParserRuleContext t = parser.program();
-        if (!noTree) {
+
             if (fullTree) {
                 showTreeViewer(t, "Full LLanguage Parser Tree");
             }

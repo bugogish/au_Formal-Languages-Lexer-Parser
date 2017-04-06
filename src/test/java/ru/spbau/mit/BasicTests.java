@@ -232,4 +232,8 @@ public class BasicTests {
     public void testIncorrectNestedComment() throws IOException {
         testLexem(null, "(* (* comment *)");
     }
+    @Test
+    public void starEndingComment() throws IOException {
+        testLexem("COMMENT", "(* ** **)");
+    }
 }
