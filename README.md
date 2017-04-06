@@ -14,8 +14,8 @@
 * `-notree` - выводит в консоль только результат работы лексера  
 
 ### Описание работы  
-Скрипт умеет рисовать 2 вида АСТ:  
-Пример программы:  
+Скрипт умеет рисовать несколько видов АСТ:  
+**Пример программы:**  
 `if (true) then skip else begin write(x) ; z := 13 end`
 1. Полное дерево, сгенерированное парсером:  
 ![alt text][full]
@@ -23,6 +23,10 @@
 ![alt text][trimmed]
 
 По умолчанию генерируется второй вариант, первый можно посмотреть запустить скрипт с ключом `-fulltree`.
+В этих двух случаях в вершинах выводится текст лексемы и ее позиция во входном файле, считая от начала.  
+3. Текстовый вариант дерева, напечатанный в консоль при запуске с ключом `-text`, будет содержать в себе полную информацию о лексемах:  
+![alt text][text]
+
 ### Запуск тестов
 * Для запуска тестов необходимо выполнить команду ./gradlew test
 * Результат можно посмотреть в build/reports/tests
@@ -33,3 +37,4 @@
 
 [full]: https://github.com/bugogish/Formal-Languages/blob/Parser/img/FULL.png "Full tree"
 [trimmed]: https://github.com/bugogish/Formal-Languages/blob/Parser/img/TRiMMED.png "Trimmed tree"
+[text]: https://github.com/bugogish/Formal-Languages/blob/Parser/img/TEXT.png "Text tree"
