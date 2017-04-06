@@ -47,8 +47,8 @@ public class BasicTests {
         testLexem("LINE_COMMENT", text);
     }
 
-    private void testCorrectIdentifier(String text) throws IOException {
-        testLexem("Identifier", text);
+    private void testCorrectId(String text) throws IOException {
+        testLexem("Id", text);
     }
 
     private void testKeyword(String name, String type) throws IOException {
@@ -121,8 +121,8 @@ public class BasicTests {
     public void testBoolean() throws IOException {
         testLexem("Boolean", "true");
         testLexem("Boolean", "false");
-        testLexem("Identifier", "TRUE");
-        testLexem("Identifier", "False");
+        testLexem("Id", "TRUE");
+        testLexem("Id", "False");
     }
 
     @Test
@@ -162,11 +162,11 @@ public class BasicTests {
     }
 
     @Test
-    public void testCorrectIdentifier() throws IOException, LexException {
-        String[] identifiers = {"simpleID", "id1234", "_1234 ", "_____", "id_1234",
+    public void testCorrectId() throws IOException, LexException {
+        String[] Ids = {"simpleID", "id1234", "_1234 ", "_____", "id_1234",
                 "a", "_a", "A", "a_b", "iDeNt", "_i_D_", "__agent007__", "_13", "e2_e4", "reader", "Write"};
-        for (String id : identifiers) {
-            testCorrectIdentifier(id);
+        for (String id : Ids) {
+            testCorrectId(id);
         }
     }
 
@@ -178,11 +178,11 @@ public class BasicTests {
         List<Token> lexems = runner.getTokensFromInputStream(reader);
         Vocabulary vocabulary = runner.getVocabulary();
         Token token = lexems.get(0);
-        assertFalse(vocabulary.getSymbolicName(token.getType()).equals("Identifier"));
+        assertFalse(vocabulary.getSymbolicName(token.getType()).equals("Id"));
     }
 
     @Test(expected = LexException.class)
-    public void testWrongIdentifier() throws IOException, LexException {
+    public void testWrongId() throws IOException, LexException {
         String id = "!myVar!";
         LexerRunner runner = new LexerRunner(false);
         runner.getTokensFromInputStream(new StringReader(id));
