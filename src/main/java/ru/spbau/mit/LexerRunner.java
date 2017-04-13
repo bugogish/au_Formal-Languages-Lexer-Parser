@@ -3,12 +3,15 @@ package ru.spbau.mit;
 
 import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.TerminalNodeImpl;
 import org.antlr.v4.runtime.tree.Tree;
 import ru.spbau.mit.utils.*;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -63,13 +66,39 @@ class LexerRunner {
 
     }
 
+    private void clearTree(ParserRuleContext tree) {
+        ArrayList<ParseTree> fake = new ArrayList<>();
+
+        for (ParseTree node : tree.children) {
+
+            if (node instanceof ParserRuleContext) {
+                clearTree((ParserRuleContext)node);
+                fake.add(node);
+            }
+            else {
+                if (node instanceof TerminalNodeImpl) {
+                    if (!((node.toString().equals("begin")) ||
+                            (node.toString().equals("end")) ||
+                            (node.toString().equals(")")) ||
+                            (node.toString().equals("(")) )) {
+                        fake.add(node);
+                    }
+                }
+            }
+        }
+
+        tree.children = fake;
+    }
+
     void parseFile(String file) throws IOException {
         CommonTokenStream tokens = lexFile(file, Token.DEFAULT_CHANNEL);
         if (!noTree) {
-        parser = new LLanguageParser(tokens);
-        parser.removeErrorListeners();
-        parser.addErrorListener(new ErrorListener());
-        ParserRuleContext t = parser.program();
+            parser = new LLanguageParser(tokens);
+            parser.removeErrorListeners();
+            parser.addErrorListener(new ErrorListener());
+            ParserRuleContext t = parser.program();
+
+            clearTree(t);
 
             if (fullTree) {
                 showTreeViewer(t, "Full LLanguage Parser Tree");
