@@ -58,7 +58,7 @@ public class ASTBuilder implements Tree {
         return children.size();
     }
 
-    private Object getPayload(ParseTree node) {
+    private static Object getPayload(ParseTree node) {
             if (node.getChildCount() == 0) {
                 return node.getPayload();
             }
@@ -69,15 +69,18 @@ public class ASTBuilder implements Tree {
         }
 
     private static void traverse(ParseTree node, ASTBuilder ASTnode) {
+            String type = ASTBuilder.getPayload(node).toString();
+
             if (node.getChildCount() == 0) {
                 new ASTBuilder(ASTnode, node);
             }
-            else if (node.getChildCount() == 1) {
+            else if (node.getChildCount() == 1 && !type.endsWith("statement")) {
                 traverse(node.getChild(0), ASTnode);
             }
-            else if (node.getChildCount() > 1) {
+            else {
                 for (int i = 0; i < node.getChildCount(); i++) {
                     ASTBuilder candidateNode = new ASTBuilder(ASTnode, node.getChild(i));
+
                     if (!(candidateNode.payload instanceof Token)) {
                         traverse(node.getChild(i), candidateNode);
                     }

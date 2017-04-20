@@ -4,16 +4,18 @@ package ru.spbau.mit.utils;
 import org.antlr.v4.gui.TreeTextProvider;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.Vocabulary;
 import org.antlr.v4.runtime.tree.Tree;
 import org.antlr.v4.runtime.tree.Trees;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CustomTextProvider implements TreeTextProvider {
-    private List<String> ruleNames;
+    private final Vocabulary vocabulary;
 
-    public CustomTextProvider(List<String> ruleNames) {
-        this.ruleNames = ruleNames;
+    public CustomTextProvider(Vocabulary vocabulary) {
+        this.vocabulary = vocabulary;
     }
 
     @Override
@@ -21,12 +23,22 @@ public class CustomTextProvider implements TreeTextProvider {
         Object payload = node.getPayload();
         if (payload instanceof Token) {
             Token token = (Token) payload;
-            int pos = token.getStartIndex();
+            String type = vocabulary.getSymbolicName(token.getType());
             String text = token.getText();
-            return String.format("[%s, %d]", text, pos);
-        } else if (payload instanceof ParserRuleContext) {
-            return String.valueOf(Trees.getNodeText(node, ruleNames));
+            int pos = token.getCharPositionInLine();
+            if (Objects.equals(type, "Id") || Objects.equals(type, "Float") || Objects.equals(type, "Boolean")) {
+                return String.format("%s[%s, %d, %d, %d]", type, text, token.getLine(), pos, pos + text.length() - 1);
+            } else {
+                return String.format("%s[%d, %d, %d]", type, token.getLine(), pos, pos + text.length() - 1);
+            }
+        } else {
+            if (payload.toString().endsWith("expr")) {
+                return "expression";
+            }
+//            if (payload.toString().equals("block")) {
+//                return "statement";
+//            }
+            return payload.toString();
         }
-        return payload.toString();
     }
 }

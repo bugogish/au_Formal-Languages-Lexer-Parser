@@ -7,12 +7,27 @@ package ru.spbau.mit.utils;
 program : statement (SEMICOLON statement)*;
 
 statement
-    : KSKIP
+    : skip_statement
     | assignment
-    | WRITE LPAREN expression RPAREN
-    | READ LPAREN Id RPAREN
-    | WHILE LPAREN expression RPAREN DO block
-    | IF LPAREN expression RPAREN THEN block ELSE block;
+    | write_statement
+    | read_statement
+    | while_statement
+    | if_statement;
+
+skip_statement
+    : KSKIP;
+
+write_statement
+    : WRITE LPAREN expression RPAREN;
+
+read_statement
+    : READ LPAREN Id RPAREN;
+
+while_statement
+    : WHILE LPAREN expression RPAREN DO block;
+
+if_statement
+    : IF LPAREN expression RPAREN THEN block ELSE block;
 
 block
     : BEGIN statement (SEMICOLON statement)* END

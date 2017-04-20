@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.tree.Tree;
 import ru.spbau.mit.utils.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -49,24 +50,7 @@ class LexerRunner {
         }
     }
 
-    private void showTreeViewer(Tree tree, String title) {
-        List<String> ruleNames= Arrays.asList(parser.getRuleNames());
-        TreeViewer tv = new TreeViewer(ruleNames, tree);
-        tv.setTreeTextProvider(new CustomTextProvider(ruleNames));
-        JFrame frame = new JFrame(title);
-        JPanel panel = new JPanel();
-        tv.setScale(1.7);
-        tv.setUseCurvedEdges(true);
-        tv.setFontSize(6);
-        panel.add(tv);
-        frame.add(panel);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(500,500);
-        frame.setVisible(true);
-
-    }
-
-    private void clearTree(ParserRuleContext tree) {
+    private static void clearTree(ParserRuleContext tree) {
         ArrayList<ParseTree> fake = new ArrayList<>();
 
         for (ParseTree node : tree.children) {
@@ -77,10 +61,8 @@ class LexerRunner {
             }
             else {
                 if (node instanceof TerminalNodeImpl) {
-                    if (!((node.toString().equals("begin")) ||
-                            (node.toString().equals("end")) ||
-                            (node.toString().equals(")")) ||
-                            (node.toString().equals("(")) )) {
+                    int type = ((TerminalNodeImpl) node).symbol.getType();
+                    if (type > 9 && type != 13 && type != 14) {
                         fake.add(node);
                     }
                 }
@@ -90,8 +72,22 @@ class LexerRunner {
         tree.children = fake;
     }
 
+    private void showTreeViewer(Tree tree) {
+        List<String> ruleNames= Arrays.asList(parser.getRuleNames());
+        TreeViewer tv = new TreeViewer(ruleNames, tree);
+        tv.setTreeTextProvider(new CustomTextProvider(getVocabulary()));
+        tv.setScale(1.7);
+        tv.setUseCurvedEdges(true);
+        tv.setFontSize(6);
+        tv.setAutoscrolls(true);
+        tv.open();
+    }
+
+
+
     void parseFile(String file) throws IOException {
         CommonTokenStream tokens = lexFile(file, Token.DEFAULT_CHANNEL);
+
         if (!noTree) {
             parser = new LLanguageParser(tokens);
             parser.removeErrorListeners();
@@ -101,11 +97,11 @@ class LexerRunner {
             clearTree(t);
 
             if (fullTree) {
-                showTreeViewer(t, "Full LLanguage Parser Tree");
+                showTreeViewer(t);
             }
             else {
                 Tree tree = new ASTBuilder(t, lexer.getVocabulary());
-                showTreeViewer(tree, "LLanguage AST");
+                showTreeViewer(tree);
             }
             if (textTree) {
                 Tree tree = new ASTBuilder(t, lexer.getVocabulary());

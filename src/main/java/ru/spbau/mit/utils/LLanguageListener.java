@@ -1,4 +1,4 @@
-// Generated from /home/bugogish/au/FL/Lexer/src/main/LLanguage.g4 by ANTLR 4.6
+// Generated from /home/bugogish/au/FL/Lexer/src/main/LLanguage.g4 by ANTLR 4.7
 
 package ru.spbau.mit.utils;
 
@@ -29,6 +29,56 @@ public interface LLanguageListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStatement(LLanguageParser.StatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LLanguageParser#skip_statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSkip_statement(LLanguageParser.Skip_statementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LLanguageParser#skip_statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSkip_statement(LLanguageParser.Skip_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LLanguageParser#write_statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterWrite_statement(LLanguageParser.Write_statementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LLanguageParser#write_statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitWrite_statement(LLanguageParser.Write_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LLanguageParser#read_statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRead_statement(LLanguageParser.Read_statementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LLanguageParser#read_statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRead_statement(LLanguageParser.Read_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LLanguageParser#while_statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhile_statement(LLanguageParser.While_statementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LLanguageParser#while_statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhile_statement(LLanguageParser.While_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LLanguageParser#if_statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_statement(LLanguageParser.If_statementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LLanguageParser#if_statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_statement(LLanguageParser.If_statementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LLanguageParser#block}.
 	 * @param ctx the parse tree

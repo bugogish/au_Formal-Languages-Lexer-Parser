@@ -1,4 +1,4 @@
-// Generated from /home/bugogish/au/FL/Lexer/src/main/LLanguage.g4 by ANTLR 4.6
+// Generated from /home/bugogish/au/FL/Lexer/src/main/LLanguage.g4 by ANTLR 4.7
 
 package ru.spbau.mit.utils;
 
@@ -24,6 +24,36 @@ public interface LLanguageVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStatement(LLanguageParser.StatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LLanguageParser#skip_statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSkip_statement(LLanguageParser.Skip_statementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LLanguageParser#write_statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWrite_statement(LLanguageParser.Write_statementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LLanguageParser#read_statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRead_statement(LLanguageParser.Read_statementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LLanguageParser#while_statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhile_statement(LLanguageParser.While_statementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LLanguageParser#if_statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_statement(LLanguageParser.If_statementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LLanguageParser#block}.
 	 * @param ctx the parse tree
