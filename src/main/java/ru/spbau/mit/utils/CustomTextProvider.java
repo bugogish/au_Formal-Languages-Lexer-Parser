@@ -23,14 +23,9 @@ public class CustomTextProvider implements TreeTextProvider {
         Object payload = node.getPayload();
         if (payload instanceof Token) {
             Token token = (Token) payload;
-            String type = vocabulary.getSymbolicName(token.getType());
+            int pos = token.getStartIndex();
             String text = token.getText();
-            int pos = token.getCharPositionInLine();
-            if (Objects.equals(type, "Id") || Objects.equals(type, "Float") || Objects.equals(type, "Boolean")) {
-                return String.format("%s[%s, %d, %d, %d]", type, text, token.getLine(), pos, pos + text.length() - 1);
-            } else {
-                return String.format("%s[%d, %d, %d]", type, token.getLine(), pos, pos + text.length() - 1);
-            }
+            return String.format("[%s, %d]", text, pos);
         } else {
             if (payload.toString().endsWith("expr")) {
                 return "expression";
